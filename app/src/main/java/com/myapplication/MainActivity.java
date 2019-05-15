@@ -2,13 +2,12 @@ package com.myapplication;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import API.EmployeeApi;
-import model.Empolyees;
+import model.Employees;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,21 +32,21 @@ private final static String BASE_URL="http://dummy.restapiexample.com/api/v1/";
                 .build();
 
         EmployeeApi employeeApi=retrofit.create(EmployeeApi.class);
-        Call<List<Empolyees>>ListCall=employeeApi.getEmployee();
-        ListCall.enqueue(new Callback<List<Empolyees>>() {
+        Call<List<Employees>>ListCall=employeeApi.getEmployee();
+        ListCall.enqueue(new Callback<List<Employees>>() {
             @Override
-            public void onResponse(Call<List<Empolyees>> call, Response<List<Empolyees>> response) {
+            public void onResponse(Call<List<Employees>> call, Response<List<Employees>> response) {
                 if (!response.isSuccessful()) {
 
                     tvData.setText("code:"+response.code());
                     return;
                 }
-                List<Empolyees>empolyeesList=response.body();
-                for (Empolyees empolyees:empolyeesList){
+                List<Employees>empolyeesList=response.body();
+                for (Employees empolyees:empolyeesList){
                     String content="";
                     content+="id:"+empolyees.getId()+"\n";
                     content+="employee_name:"+empolyees.getEmployee_name()+"\n";
-                    content+="salary:"+empolyees.getEmployes_salary()+"\n";
+                    content+="salary:"+empolyees.getEmployee_salary()+"\n";
                     content+="age:"+empolyees.getEmployee_age()+"\n";
                     content+="image:"+empolyees.getProfile_image()+"\n";
 
@@ -56,7 +55,7 @@ private final static String BASE_URL="http://dummy.restapiexample.com/api/v1/";
             }
 
             @Override
-            public void onFailure(Call<List<Empolyees>> call, Throwable t) {
+            public void onFailure(Call<List<Employees>> call, Throwable t) {
 tvData.setText("Error"+ t.getMessage());
             }
         });

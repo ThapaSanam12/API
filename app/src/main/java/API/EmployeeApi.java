@@ -2,8 +2,8 @@ package API;
 
 import java.util.List;
 
-import model.EmpolyeeCUD;
-import model.Empolyees;
+import model.EmployeeCUD;
+import model.Employees;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -14,16 +14,16 @@ import retrofit2.http.Path;
 
 public interface EmployeeApi {
     @GET("employees")
-    Call<List<Empolyees>>getEmployee();
+    Call<List<Employees>>getEmployee();
 
     @GET("employee/{empID}")
-    Call<Empolyees>getEmployeeById(@Path("empID") int empId);
+    Call<Employees>getEmployeeById(@Path("empID") int empId);
 
     @POST("create")
-    Call<Void>registerEmployee(@Body EmpolyeeCUD emp);
+    Call<Void>registerEmployee(@Body EmployeeCUD emp);
 
     @PUT("upadte/{empID}")
-    Call<Void>updateEmployee(@Path("empID") int empId);
+    Call<Void>updateEmployee(@Path("empID") int empId, @Body EmployeeCUD emp);
 
     @DELETE("delete/{empID}")
     Call<Void>deleteEmployee(@Path("empID") int empId);

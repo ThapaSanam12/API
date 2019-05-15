@@ -13,14 +13,14 @@ import retrofit2.Retrofit;
 
 
 import API.EmployeeApi;
-import model.EmpolyeeCUD;
-import model.Empolyees;
+import model.EmployeeCUD;
+import model.Employees;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UpdateDeleteActivity extends AppCompatActivity {
-private  Button btnSearch,btnUpadate,btnDelete;
+private  Button btnSearch,btnUpdate,btnDelete;
 private EditText etEmpName,etEmpSalary,etEmpAge;
 private EditText etEmpID;
     private final static String BASE_URL="http://dummy.restapiexample.com/api/v1/";
@@ -31,7 +31,7 @@ EmployeeApi employeeApi;
         setContentView(R.layout.activity_update_delete);
 
         btnSearch=findViewById(R.id.btnSearch);
-        btnUpadate=findViewById(R.id.btnUpdate);
+   btnUpdate=findViewById(R.id.btnUpdate);
         btnDelete=findViewById(R.id.btnDelete);
         etEmpID=findViewById(R.id.etEmpID);
         etEmpName=findViewById(R.id.etEmpName);
@@ -45,12 +45,12 @@ EmployeeApi employeeApi;
                 loadData();
             }
         });
-        btnUpadate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateEmployee();
-            }
-        });
+      btnUpdate.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              updateEmployee();
+          }
+      });
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,40 +71,40 @@ private void CreateInstance(){
 
 
         CreateInstance();
-        Call<Empolyees>ListCall= employeeApi.getEmployeeById(Integer.parseInt(etEmpID.getText().toString()));
-ListCall.enqueue(new Callback<Empolyees>() {
+        Call<Employees>ListCall= employeeApi.getEmployeeById(Integer.parseInt(etEmpID.getText().toString()));
+ListCall.enqueue(new Callback<Employees>() {
     @Override
-    public void onResponse(Call<Empolyees> call, Response<Empolyees> response) {
+    public void onResponse(Call<Employees> call, Response<Employees> response) {
         etEmpName.setText(response.body().getEmployee_name());
-        etEmpSalary.setText(Float.toString(response.body().getEmployes_salary()));
+        etEmpSalary.setText(Float.toString(response.body().getEmployee_salary()));
         etEmpAge.setText(Integer.toString(response.body().getEmployee_age()));
     }
 
     @Override
-    public void onFailure(Call<Empolyees> call, Throwable t) {
+    public void onFailure(Call<Employees> call, Throwable t) {
         Toast.makeText(UpdateDeleteActivity.this, "error", Toast.LENGTH_SHORT).show();
     }
 });
 
    }
-
-    private void updateEmployee(){
+private void updateEmployee(){
         CreateInstance();
-        EmpolyeeCUD empolyee=new EmpolyeeCUD(
+        EmployeeCUD employee=new EmployeeCUD(
                 etEmpName.getText().toString(),
                 Float.parseFloat(etEmpSalary.getText().toString()),
                 Integer.parseInt(etEmpAge.getText().toString())
         );
-        Call<Void>voidCall=employeeApi.updateEmployee(Integer.parseInt(etEmpID.getText().toString()));
+        Call<Void> voidCall=employeeApi.updateEmployee(Integer.parseInt(etEmpID.getText().toString()), employee);
+
         voidCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(UpdateDeleteActivity.this, "Update", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateDeleteActivity.this, "successfully update", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(UpdateDeleteActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateDeleteActivity.this, "error", Toast.LENGTH_SHORT).show();
             }
         });
     }

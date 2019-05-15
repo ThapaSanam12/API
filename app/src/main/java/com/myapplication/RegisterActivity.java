@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import API.EmployeeApi;
-import model.EmpolyeeCUD;
+import model.EmployeeCUD;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +43,7 @@ private Button btnRegister;
         Float salary=Float.parseFloat(etSalary.getText().toString());
         int age=Integer.parseInt(etAge.getText().toString());
 
-        EmpolyeeCUD empolyee=new EmpolyeeCUD(name, salary, age);
+        EmployeeCUD empolyee=new EmployeeCUD(name, salary, age);
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)

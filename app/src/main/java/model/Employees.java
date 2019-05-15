@@ -2,17 +2,18 @@ package model;
 
 import retrofit2.http.GET;
 
-public class Empolyees {
+public class Employees {
     private int id;
-private String employee_name;
-private float employes_salary;
-private int employee_age;
-private String profile_image;
+    private String employee_name;
+    private float employee_salary;
+    private int employee_age;
+    private String profile_image;
 
-    public Empolyees(int id, String employee_name, float employes_salary, int employee_age, String profile_image) {
+
+    public Employees(int id, String employee_name, float employee_salary, int employee_age, String profile_image) {
         this.id = id;
         this.employee_name = employee_name;
-        this.employes_salary = employes_salary;
+        this.employee_salary = employee_salary;
         this.employee_age = employee_age;
         this.profile_image = profile_image;
     }
@@ -33,12 +34,12 @@ private String profile_image;
         this.employee_name = employee_name;
     }
 
-    public float getEmployes_salary() {
-        return employes_salary;
+    public float getEmployee_salary() {
+        return employee_salary;
     }
 
-    public void setEmployes_salary(float employes_salary) {
-        this.employes_salary = employes_salary;
+    public void setEmployee_salary(float employee_salary) {
+        this.employee_salary = employee_salary;
     }
 
     public int getEmployee_age() {

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import API.EmployeeApi;
-import model.Empolyees;
+import model.Employees;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,23 +44,23 @@ btnSearch.setOnClickListener(new View.OnClickListener() {
                 .build();
 
         EmployeeApi employeeApi=retrofit.create(EmployeeApi.class);
-        Call<Empolyees>ListCall=employeeApi.getEmployeeById(Integer.parseInt(etEmpID.getText().toString()));
+        Call<Employees>ListCall=employeeApi.getEmployeeById(Integer.parseInt(etEmpID.getText().toString()));
 
-        ListCall.enqueue(new Callback<Empolyees>() {
+        ListCall.enqueue(new Callback<Employees>() {
             @Override
-            public void onResponse(Call<Empolyees> call, Response<Empolyees> response) {
+            public void onResponse(Call<Employees> call, Response<Employees> response) {
 
              Toast.makeText(SearchActivity.this,response.body().toString(),Toast.LENGTH_SHORT).show();
              String content="";
                 content +="Id:"+response.body().getId()+"\n";
                 content +="Name:"+response.body().getEmployee_name()+"\n";
                 content +="Age:"+response.body().getEmployee_age()+"\n";
-                content +="Salary:"+response.body().getEmployes_salary()+"\n";
+                content +="Salary:"+response.body().getEmployee_salary()+"\n";
                 tvData.setText(content);
             }
 
             @Override
-            public void onFailure(Call<Empolyees> call, Throwable t) {
+            public void onFailure(Call<Employees> call, Throwable t) {
                 Toast.makeText(SearchActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
